@@ -64,7 +64,7 @@
 
 - name: Register nexus package name
   ansible.builtin.set_fact:
-    nexus_package: nexus-{{ nexus_version }}-unix.tar.gz
+    nexus_package: nexus-{{ nexus_version }}{{ (nexus_java_version > 8) | ternary('-java11', '-java8') }}-unix.tar.gz
 
 - name: Download nexus_package
   ansible.builtin.get_url:
